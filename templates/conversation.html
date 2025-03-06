@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konwersacja z {{ receiver['username'] }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <!-- Lewa strona nawigacji -->
+            <li><a href="{{ url_for('index') }}">Strona główna</a></li>
+            <li><a href="{{ url_for('inbox') }}">Wiadomości</a></li>
+            <li><a href="{{ url_for('account_redirect') }}">Konto</a></li>
+            <li><a href="{{ url_for('add_skill') }}">Dodaj umiejętność</a></li>
+    
+            <!-- Prawa strona nawigacji -->
+            {% if session.get('username') %}
+                <li style="float: right;"><a href="{{ url_for('logout') }}">Wyloguj się</a></li>
+            {% else %}
+                <li style="float: right;"><a href="{{ url_for('account') }}">Zaloguj się</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <h1>Konwersacja z <a href="{{ url_for('user_details', user_id=receiver['id']) }}">{{ receiver['username'] }}</a></h1>
+
+    <div class="messages">
+        {% for message in messages %}
+            <div class="message {% if message['sender_id'] == session['user_id'] %}sent{% else %}received{% endif %}">
+                <p class="messagetext"><strong>{{ message['sender_username'] }}:</strong> {{ message['message'] }}</p>
+                <p><small>{{ message['timestamp'] }}</small></p>
+                
+                <!-- Przyciski do akceptacji i odrzucenia wymiany -->
+                {% if message['exchange_status'] == 'pending' and message['receiver_id'] == session['user_id'] %}
+                    <form method="POST" action="{{ url_for('accept_exchange', message_id=message['id']) }}" style="display: inline;">
+                        <button type="submit" class="btn approve">Przyjmij wymianę</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('reject_exchange', message_id=message['id']) }}" style="display: inline;">
+                        <button type="submit" class="btn reject">Odrzuć wymianę</button>
+                    </form>
+                {% elif message['exchange_status'] == 'accepted' %}
+                    <p>Wymiana zaakceptowana.</p>
+                {% elif message['exchange_status'] == 'rejected' %}
+                    <p>Wymiana odrzucona.</p>
+                    
+                {% endif %}
+            </div>
+        {% else %}
+            <p>Brak wiadomości.</p>
+        {% endfor %}
+        
+    </div>
+
+    <form method="POST" action="{{ url_for('send_message', receiver_id=receiver['id']) }}">
+        <textarea name="message" placeholder="Napisz wiadomość..." required></textarea>
+        <br>
+        <input type="submit" value="Wyślij">
+    </form>
+    <form method="POST" action="{{ url_for('propose_exchange', receiver_id=receiver['id']) }}">
+        <input type="submit" value="Zaproponuj wymianę">
+    </form>
+
+</body>
+</html>

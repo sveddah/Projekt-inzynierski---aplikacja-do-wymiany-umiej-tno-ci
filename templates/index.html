@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wyszukaj umiejętności</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <!-- Lewa strona nawigacji -->
+            <li><a href="{{ url_for('index') }}">Strona główna</a></li>
+            <li><a href="{{ url_for('inbox') }}">Wiadomości</a></li>
+            <li><a href="{{ url_for('account_redirect') }}">Konto</a></li>
+            <li><a href="{{ url_for('add_skill') }}">Dodaj umiejętność</a></li>
+    
+            <!-- Prawa strona nawigacji -->
+            {% if session.get('username') %}
+                <li style="float: right;"><a href="{{ url_for('logout') }}">Wyloguj się</a></li>
+            {% else %}
+                <li style="float: right;"><a href="{{ url_for('account') }}">Zaloguj się</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <h1>Wyszukaj umiejętności</h1>
+
+    <form method="GET">
+        <input type="text" name="search" placeholder="Wyszukaj umiejętności" value="{{ request.args.get('search', '') }}">
+        <input type="text" name="city" placeholder="Miasto" value="{{ request.args.get('city', '') }}">
+        <button type="submit">Szukaj</button>
+    </form>
+
+    <div id="data-container">
+        {% for skill in skills %}
+            <div class="skill-block fade-in">
+                <h2>{{ skill['skill_name'] }}</h2>
+                <p><strong>Miasto:</strong> {{ skill['user_city'] }}</p>
+                <p><strong>Wystawił:</strong> <a href="{{ url_for('user_details', user_id=skill['user_id']) }}">{{ skill['username'] }}</a></p>
+                
+                <!-- Przycisk do wysłania wiadomości - wyświetlany tylko, jeśli to nie jest ogłoszenie użytkownika -->
+                {% if skill['user_id'] != session.get('user_id') %}
+                    <a href="{{ url_for('send_message', receiver_id=skill['user_id']) }}" class="btn">Wyślij wiadomość</a>
+                {% endif %}
+            </div>
+        {% else %}
+            <p>Brak umiejętności.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

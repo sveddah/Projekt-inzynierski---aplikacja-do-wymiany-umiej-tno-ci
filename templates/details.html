@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moje konto</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Strona główna</a></li>
+            <li><a href="{{ url_for('inbox') }}">Wiadomości</a></li>
+            <li><a href="{{ url_for('account_redirect') }}">Konto</a></li>
+            <li><a href="{{ url_for('add_skill') }}">Dodaj umiejętność</a></li>
+    
+            {% if session.get('username') %}
+                <li style="float: right;"><a href="{{ url_for('logout') }}">Wyloguj się</a></li>
+            {% else %}
+                <li style="float: right;"><a href="{{ url_for('account') }}">Zaloguj się</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Karta Profilu -->
+        <div class="profile-card">
+            <h2>Profil użytkownika</h2>
+            <p><strong>Nazwa użytkownika:</strong> {{ user['username'] }}</p>
+            <p><strong>Miasto:</strong> {{ user['city'] }}</p>
+            <p><strong>Data dołączenia:</strong> {{ join_date.strftime('%d/%m/%Y') }}</p>
+        </div>
+
+        <!-- Umiejętności -->
+        <div class="skills-card">
+            <h2>Umiejętności</h2>
+            <div class="skills-list">
+                {% for skill in skills %}
+                    <span> {{ skill['skill_name'] }}, </span>
+                {% else %}
+                    <p>Brak umiejętności.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Zmiana hasła -->
+        <div class="password-card">
+            <h2>Zmień hasło</h2>
+            <form method="POST" action="{{ url_for('change_password') }}">
+                <label for="current_password">Obecne hasło:</label>
+                <input type="password" id="current_password" name="current_password" required>
+
+                <label for="new_password">Nowe hasło:</label>
+                <input type="password" id="new_password" name="new_password" required>
+
+                <input type="submit" value="Zmień hasło" class="btn">
+            </form>
+        </div>
+
+        <!-- Przycisk Wylogowania -->
+        <div class="logout-container">
+            <a href="{{ url_for('logout') }}" class="logout-button">🚪 Wyloguj się</a>
+        </div>
+    </div>
+</body>
+</html>

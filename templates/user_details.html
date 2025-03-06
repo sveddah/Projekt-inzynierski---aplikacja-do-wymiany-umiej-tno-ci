@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profil użytkownika {{ user['username'] }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul class="nav-bar">
+            <li><a href="{{ url_for('index') }}">Strona główna</a></li>
+            <li><a href="{{ url_for('inbox') }}">Wiadomości</a></li>
+            <li><a href="{{ url_for('account_redirect') }}">Konto</a></li>
+            <li><a href="{{ url_for('add_skill') }}">Dodaj umiejętność</a></li>
+            {% if session.get('username') %}
+                <li class="right"><a href="{{ url_for('logout') }}">Wyloguj się</a></li>
+            {% else %}
+                <li class="right"><a href="{{ url_for('account') }}">Zaloguj się</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="profile-container">
+        <h1 class="profile-title">Profil użytkownika {{ user['username'] }}</h1>
+        <div class="user-details">
+            <p><strong>Miasto:</strong> {{ user['city'] }}</p>
+            <p><strong>Data dołączenia:</strong> {{ join_date.strftime('%d/%m/%Y') }}</p>
+            <p><strong>Ocena:</strong> ★★★★★</p>
+        </div>
+
+        <h2 class="section-title">Umiejętności</h2>
+        <ul class="skills-list">
+            {% for skill in skills %}
+                <li class=>{{ skill['skill_name'] }}</li>
+            {% else %}
+                <li class="no-skills">Brak umiejętności.</li>
+            {% endfor %}
+        </ul>
+
+        <h2 class="section-title">Komentarze</h2>
+        <div class="comments">
+            {% for comment in comments %}
+                <div class="comment-box">
+                    <p><strong>{{ comment['author_username'] }}:</strong> {{ comment['comment'] }}</p>
+                    <p class="comment-date">{{ comment['timestamp'].strftime('%d/%m/%Y %H:%M') }}</p>
+                </div>
+            {% else %}
+                <p class="no-comments">Brak komentarzy.</p>
+            {% endfor %}
+        </div>
+
+        {% if session.get('user_id') and session.get('user_id') != user['id'] %}
+            <h2 class="section-title">Dodaj komentarz</h2>
+            <form method="POST" action="{{ url_for('add_comment', user_id=user['id']) }}" class="comment-form">
+                <textarea name="comment" placeholder="Napisz komentarz..." required></textarea>
+                <br>
+                <input type="submit" value="Dodaj komentarz">
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

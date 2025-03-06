@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wyślij wiadomość</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <!-- Lewa strona nawigacji -->
+            <li><a href="{{ url_for('index') }}">Strona główna</a></li>
+            <li><a href="{{ url_for('inbox') }}">Wiadomości</a></li>
+            <li><a href="{{ url_for('account_redirect') }}">Konto</a></li>
+            <li><a href="{{ url_for('new_offer') }}">Dodaj umiejętność</a></li>
+    
+            <!-- Prawa strona nawigacji -->
+            {% if session.get('username') %}
+                <li style="float: right;"><a href="{{ url_for('logout') }}">Wyloguj się</a></li>
+            {% else %}
+                <li style="float: right;"><a href="{{ url_for('account') }}">Zaloguj się</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <h1>Wyślij wiadomość</h1>
+
+    {% if offer %}
+        <p>Oferta: {{ offer['skill_name'] }}</p>
+    {% endif %}
+
+    <p>Odbiorca: {{ receiver['username'] }}</p>
+
+    <form method="POST" action="{{ url_for('send_message', receiver_id=receiver['id']) }}">
+
+        <label for="message">Twoja wiadomość:</label>
+        <textarea id="message" name="message" required></textarea>
+        <br><br>
+        <input type="submit" value="Wyślij">
+    </form>
+</body>
+</html>

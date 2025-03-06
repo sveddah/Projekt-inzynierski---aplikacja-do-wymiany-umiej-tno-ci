@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj umiejętność</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <!-- Lewa strona nawigacji -->
+            <li><a href="{{ url_for('index') }}">Strona główna</a></li>
+            <li><a href="{{ url_for('inbox') }}">Wiadomości</a></li>
+            <li><a href="{{ url_for('account_redirect') }}">Konto</a></li>
+            <li><a href="{{ url_for('add_skill') }}">Dodaj umiejętność</a></li>
+    
+            <!-- Prawa strona nawigacji -->
+            {% if session.get('username') %}
+                <li style="float: right;"><a href="{{ url_for('logout') }}">Wyloguj się</a></li>
+            {% else %}
+                <li style="float: right;"><a href="{{ url_for('account') }}">Zaloguj się</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <h1>Dodaj umiejętność</h1>
+
+    <form method="POST">
+        <label for="skill_name">Nazwa umiejętności:</label>
+        <input type="text" id="skill_name" name="skill_name" required>
+        
+        <label for="description">Opis:</label>
+        <textarea id="description" name="description"></textarea>
+        
+        <input type="submit" value="Dodaj">
+    </form>
+</body>
+</html>

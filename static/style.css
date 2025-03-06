@@ -1,0 +1,665 @@
+/* Ogólne style */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Nawigacja */
+nav {
+    background-color: #343a40;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #495057;
+}
+
+/* Nagłówki */
+h1, h2, h3 {
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+/* Formularze */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+textarea {
+    width: 96%;
+}
+
+input[type="submit"], button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #0056b3;
+}
+
+/* Wiadomości i konwersacje */
+.messages {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.message {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message.sent {
+    background-color: #e2f0ff;
+    border-color: #007BFF;
+}
+
+.message.received {
+    background-color: #f8f9fa;
+    border-color: #ddd;
+}
+
+.message p {
+    margin: 0;
+}
+
+.message small {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Przyciski akceptacji i odrzucenia wymiany */
+.btn {
+    background-color: #14411f;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+.btn.reject {
+    background-color: #dc3545;
+    width: 30%; 
+}
+
+.btn.approve {
+    background-color: #155013;
+    width: 30%;
+}
+
+.btn.reject:hover {
+    background-color: #c82333;
+}
+
+.wyslij {
+    width: 10%;
+}
+
+/* Animacje */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    .messages {
+        padding: 15px;
+    }
+
+    .message {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    input[type="text"], input[type="password"], textarea {
+        font-size: 0.9rem;
+    }
+
+    input[type="submit"], button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+/* Dodatkowe efekty wizualne */
+body {
+    background: linear-gradient(135deg, #f4f4f9, #e2e2e9);
+}
+
+nav {
+    background: linear-gradient(135deg, #343a40, #2c3136);
+}
+
+.btn {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Efekt hover na kartach umiejętności */
+.skill-block {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Efekt hover na przyciskach nawigacji */
+nav ul li a {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+nav ul li a:hover {
+    transform: translateY(-2px);
+}
+
+/* Animacja dla przycisków */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn.pulse {
+    animation: pulse 1.5s infinite;
+}
+
+/* Efekt hover na formularzach */
+form {
+    transition: box-shadow 0.3s ease;
+}
+
+form:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Stylowanie dla siatki ofert */
+#data-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolumny */
+    gap: 20px; /* Odstępy między ofertami */
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.skill-block {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.skill-block h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.skill-block p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.skill-block a.btn {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.skill-block a.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsywność dla siatki */
+@media (max-width: 1024px) {
+    #data-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolumny na tabletach */
+    }
+}
+
+@media (max-width: 768px) {
+    #data-container {
+        grid-template-columns: 1fr; /* 1 kolumna na telefonach */
+    }
+}
+
+/* Kontener dla skrzynki odbiorczej */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Lista konwersacji */
+.conversations {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Styl dla każdej konwersacji */
+.conversation-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.conversation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styl dla nagłówka konwersacji */
+.conversation-header {
+    display: flex;
+    align-items: center;
+}
+
+.user-icon {
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+.conversation-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.conversation-info p {
+    margin: 5px 0 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* Ostatnia wiadomość */
+.last-message {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* Przycisk do otwierania konwersacji */
+.conversation-card .btn {
+    padding: 8px 16px;
+    background: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.conversation-card .btn:hover {
+    background: #0056b3;
+}
+
+/* Styl pustej skrzynki odbiorczej */
+.empty-inbox {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* Kontener dla strony logowania/rejestracji */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Karty dla formularzy */
+.auth-forms {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styl nagłówków */
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Formularze */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Ikony i pola wejściowe */
+label {
+    font-weight: bold;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+input[type="text"], input[type="password"], input {
+    width: 96%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Przycisk */
+.btn {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* Ogólny kontener */
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Karty z informacjami */
+.profile-card, .skills-card, .password-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Umiejętności */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+
+.skill {
+    background: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+/* Formularz zmiany hasła */
+
+/* Przycisk */
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Wylogowanie */
+.logout-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logout-button {
+    display: inline-block;
+    background: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.logout-button:hover {
+    background: #c82333;
+}
+
+.comments {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.comment p {
+    margin: 5px 0;
+}
+
+.user-details {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.user-details p {
+    margin-bottom: 10px;
+}
+
+.messagetext {
+    color: black;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skrzynka odbiorcza</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Strona główna</a></li>
+            <li><a href="{{ url_for('inbox') }}">Wiadomości</a></li>
+            <li><a href="{{ url_for('account_redirect') }}">Konto</a></li>
+            <li><a href="{{ url_for('add_skill') }}">Dodaj umiejętność</a></li>
+            {% if session.get('username') %}
+                <li style="float: right;"><a href="{{ url_for('logout') }}">Wyloguj się</a></li>
+            {% else %}
+                <li style="float: right;"><a href="{{ url_for('account') }}">Zaloguj się</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>📩 Skrzynka odbiorcza</h1>
+
+        {% if conversations %}
+            <div class="conversations">
+                {% for conversation in conversations %}
+                    <div class="conversation-card">
+                        <div class="conversation-header">
+                            <div class="user-icon">👤</div>
+                            <div class="conversation-info">
+                                <h3>{{ conversation['other_user_name'] }}</h3>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('view_conversation', receiver_id=conversation['other_user_id']) }}" class="btn">Otwórz konwersację</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty-inbox">📭 Brak konwersacji.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
